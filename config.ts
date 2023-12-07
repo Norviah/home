@@ -21,6 +21,11 @@ export const config: Config = {
         url: 'https://linkedin.com',
         search: '/search/results/all/?keywords={}',
       },
+      {
+        name: 'Monkey Type',
+        key: 'mt',
+        url: 'https://monkeytype.com',
+      },
     ],
     Dev: [
       {
@@ -89,13 +94,6 @@ export const config: Config = {
         key: 'ig',
         url: 'https://instagram.com',
         search: '/explore/tags/{}',
-      },
-    ],
-    Play: [
-      {
-        name: 'Monkey Type',
-        key: 'mt',
-        url: 'https://monkeytype.com',
       },
     ],
   },
