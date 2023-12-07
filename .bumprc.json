@@ -68,6 +68,10 @@
     {
       "type": "docs",
       "hidden": true
+    },
+    {
+      "type": "config",
+      "hidden": true
     }
   ],
   "prompt": false,
