@@ -11,10 +11,14 @@ export function Menu(): JSX.Element {
           <div key={category} className="flex flex-col gap-7">
             {commands.map((command: Command, index: number) => {
               return (
-                <a key={`${category}-${command.name}-${index}`} href={command.url}>
-                  <div className="flex gap-4 text-sm">
+                <a
+                  key={`${category}-${command.name}-${index}`}
+                  href={command.url}
+                  className="text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  <div className="flex gap-4">
                     <span className="text-foreground">{command.key}</span>
-                    <span className="text-muted-foreground transition-colors hover:text-foreground">{command.name}</span>
+                    <span>{command.name}</span>
                   </div>
                 </a>
               );
@@ -25,3 +29,4 @@ export function Menu(): JSX.Element {
     </div>
   );
 }
+
