@@ -29,4 +29,3 @@ export function Menu(): JSX.Element {
     </div>
   );
 }
-
