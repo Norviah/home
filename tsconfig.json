@@ -19,9 +19,10 @@
       }
     ],
     "paths": {
+      "@/config": ["./config.ts"],
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/components/script.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/components/script.js", "./config.ts"],
   "exclude": ["node_modules"]
 }
