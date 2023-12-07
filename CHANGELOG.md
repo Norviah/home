@@ -1,5 +1,9 @@
 ## Unreleased
 
+### Refactored
+
+- **components/Menu**: refactor grid layout to wrap each category in a single div <code>[52aba92](https://github.com/Norviah/home/commit/52aba92825b3a50fcc7c447ebfc2b3a39beb8b88)</code>
+
 ### Build System
 
 - **bump**: ignore the `config` commit type <code>[a153874](https://github.com/Norviah/home/commit/a153874b69ed7004686ce8a0635138ebc514e42b)</code>
