@@ -1,5 +1,9 @@
 ## Unreleased
 
+### Build System
+
+- **bump**: ignore the `config` commit type <code>[a153874](https://github.com/Norviah/home/commit/a153874b69ed7004686ce8a0635138ebc514e42b)</code>
+
 ### Features
 
 - **components**: add a component to render links from the config file <code>[6726f32](https://github.com/Norviah/home/commit/6726f32fc9f19eccc710fd4ad2ea5b46eb09c326)</code>
