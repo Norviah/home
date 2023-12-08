@@ -45,6 +45,11 @@ export const config: Config = {
         key: 'cgpt',
         url: 'https://chat.openai.com/',
       },
+      {
+        name: 'v0',
+        key: 'v0',
+        url: 'https://v0.dev/',
+      },
     ],
     Entertainment: [
       {
