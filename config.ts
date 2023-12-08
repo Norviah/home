@@ -42,7 +42,7 @@ export const config: Config = {
       },
       {
         name: 'ChatGPT',
-        key: 'cg',
+        key: 'cgpt',
         url: 'https://chat.openai.com/',
       },
     ],
