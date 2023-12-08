@@ -4,14 +4,12 @@ import { Menu } from '@/components/Menu';
 
 import { cn } from '@/utils/cn';
 import { constructUrl } from '@/utils/constructUrl';
-import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 
 export default function HomePage(): JSX.Element {
   const [showMenu, setShowMenu] = useState(true);
   const [searchText, setSearchText] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
-  const router = useRouter();
 
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
