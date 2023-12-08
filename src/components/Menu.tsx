@@ -1,11 +1,14 @@
 import { config } from '@/config';
-import type { Command } from '@/types/Config';
+import { cn } from '@/utils/cn';
 
-export function Menu(): JSX.Element {
+import type { Command } from '@/types/Config';
+import type { ClassNameValue } from 'tailwind-merge';
+
+export function Menu(props: { className?: ClassNameValue }): JSX.Element {
   const entries: [string, Command[]][] = Object.entries(config.links);
 
   return (
-    <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-4">
+    <div className={cn('grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-4', props.className)}>
       {entries.map(([category, commands]) => {
         return (
           <div key={category} className="flex flex-col gap-7">
