@@ -20,7 +20,7 @@ export interface Link {
    * This structure must have a `{}` within it, which will be replaced with the
    * user's query.
    */
-  search?: `/${string}`;
+  searchTemplate?: `/${string}`;
 }
 
 export interface Command extends Link {
@@ -42,5 +42,16 @@ export interface Config {
   /**
    * The search engine that will be used when searching for a query.
    */
-  searchEngine: With<Link, 'search'>;
+  searchEngine: With<Omit<Link, 'name'>, 'searchTemplate'>;
+
+  /**
+   * The delimiter that will be used to separate paths.
+   */
+  pathDelimiter: string;
+
+  /**
+   * The delimiter that will be used to separate queries to search for within a
+   * link.
+   */
+  searchDelimiter: string;
 }

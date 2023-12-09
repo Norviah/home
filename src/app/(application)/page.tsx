@@ -3,7 +3,7 @@
 import { Menu } from '@/components/Menu';
 
 import { cn } from '@/utils/cn';
-import { constructUrl } from '@/utils/constructUrl';
+import { generateUrl } from '@/utils/constructUrl';
 import { useEffect, useRef, useState } from 'react';
 
 export default function HomePage(): JSX.Element {
@@ -43,8 +43,7 @@ export default function HomePage(): JSX.Element {
   function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const url: string = constructUrl(searchText);
-    window.location.href = url;
+    window.location.href = generateUrl(searchText);
   }
 
   return (
