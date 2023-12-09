@@ -7,8 +7,9 @@ import { constructUrl } from '@/utils/constructUrl';
 import { useEffect, useRef, useState } from 'react';
 
 export default function HomePage(): JSX.Element {
-  const [showMenu, setShowMenu] = useState(true);
+  const [state, setState] = useState<'MENU' | 'INPUT'>('MENU');
   const [searchText, setSearchText] = useState('');
+
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -20,13 +21,16 @@ export default function HomePage(): JSX.Element {
         return;
       }
 
-      setShowMenu(false);
+      if (state === 'MENU') {
+        setState('INPUT');
 
-      setTimeout(() => {
-        inputRef.current!.focus();
-        setSearchText(event.key);
-        inputRef.current!.value = event.key;
-      }, 1);
+        setTimeout(() => {
+          inputRef.current!.focus();
+
+          setSearchText((prev) => prev + event.key);
+          inputRef.current!.value = inputRef.current!.value + event.key;
+        }, 1);
+      }
     };
 
     window.addEventListener('keypress', handleKeyPress);
@@ -47,20 +51,21 @@ export default function HomePage(): JSX.Element {
     <div className="flex h-screen">
       <div className="m-auto">
         <section className="flex h-screen flex-col items-center justify-center">
-          <form onSubmit={onSubmit} className={cn(showMenu && 'hidden')}>
+          <form onSubmit={onSubmit} className={cn(state === 'MENU' && 'hidden')}>
             <input
               ref={inputRef}
               className="w-full border-none bg-transparent text-center text-6xl outline-none focus:border-none"
               type="text"
               onChange={(event) => {
                 setSearchText(event.target.value);
+
                 if (event.target.value === '') {
-                  setShowMenu(true);
+                  setState('MENU');
                 }
               }}
             />
           </form>
-          <Menu className={!showMenu && 'hidden'} />
+          <Menu className={state === 'INPUT' && 'hidden'} />
         </section>
       </div>
     </div>
