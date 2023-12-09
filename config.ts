@@ -16,6 +16,11 @@ export const config: Config = {
         searchTemplate: '/drive/search?q={}',
       },
       {
+        name: 'Vercel',
+        key: 'vc',
+        url: 'https://vercel.com',
+      },
+      {
         name: 'LinkedIn',
         key: 'li',
         url: 'https://linkedin.com',
