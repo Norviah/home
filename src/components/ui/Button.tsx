@@ -1,5 +1,4 @@
 import { Slot } from '@radix-ui/react-slot';
-import { SpinnerIcon } from '@/components/icons/Spinner';
 
 import { cn } from '@/utils/cn';
 import { cva } from 'class-variance-authority';
@@ -40,30 +39,15 @@ const buttonVariants = cva(
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
   asChild?: boolean;
-  loading?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, loading, ...props }, ref) => {
+  ({ className, variant, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : 'button';
 
     return (
-      <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
-        ref={ref}
-        {...props}
-        disabled={loading || props.disabled}
-      >
-        {loading ? (
-          <SpinnerIcon
-            className={cn(
-              'h-4 w-4 animate-spin',
-              variant === 'ghost' || variant === 'outline' ? 'text-foreground' : 'text-background'
-            )}
-          />
-        ) : (
-          props.children
-        )}
+      <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props}>
+        {props.children}
       </Comp>
     );
   }
