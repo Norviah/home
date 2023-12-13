@@ -1,44 +1,47 @@
 'use client';
 
 import { Button } from '@/components/ui/Button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/DropdownMenu';
-import { LaptopIcon, MoonIcon, SunIcon } from 'lucide-react';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/Tooltip';
+import { MoonIcon, SunIcon } from 'lucide-react';
 
 import { useTheme } from 'next-themes';
+import { useState } from 'react';
 
 export function ThemeSelector(): JSX.Element {
-  const { setTheme } = useTheme();
+  const { setTheme, theme: currentTheme } = useTheme();
+  const [openToolTip, setOpenToolTip] = useState(false);
+
+  const themes = [
+    {
+      name: 'Light',
+      onclick: () => setTheme('dark'),
+    },
+    {
+      name: 'Dark',
+      onclick: () => setTheme('system'),
+    },
+    {
+      name: 'System',
+      onclick: () => setTheme('light'),
+    },
+  ];
+
+  const theme = themes.find((t) => t.name.toLowerCase() === currentTheme?.toLowerCase()) || themes[2];
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="icon" size="icon">
-          <SunIcon className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-          <MoonIcon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-          <span className="sr-only">Toggle theme</span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme('light')} className="mb-1">
-          <SunIcon className="mr-2 h-4 w-4" />
-          <span>Light</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('dark')}>
-          <MoonIcon className="mr-2 h-4 w-4" />
-          <span>Dark</span>
-        </DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => setTheme('system')}>
-          <LaptopIcon className="mr-2 h-4 w-4" />
-          <span>System</span>
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <TooltipProvider>
+      <Tooltip open={openToolTip}>
+        <TooltipTrigger asChild onMouseEnter={() => setOpenToolTip(true)} onMouseLeave={() => setOpenToolTip(false)}>
+          <Button variant="icon" size="icon" onClick={theme.onclick}>
+            <SunIcon className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+            <MoonIcon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+            <span className="sr-only">Toggle theme</span>
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent align="end">
+          <p>{`Theme: ${theme.name} Mode`}</p>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
   );
 }
