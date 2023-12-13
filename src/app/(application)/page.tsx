@@ -18,6 +18,12 @@ export default function HomePage(): JSX.Element {
       const isInputFocused: boolean = document.activeElement === inputRef.current;
 
       if (isInputFocused) {
+        if (event.key === 'Escape') {
+          setState('MENU');
+          inputRef.current!.value = '';
+          setSearchText('');
+        }
+
         return;
       }
 
@@ -27,16 +33,18 @@ export default function HomePage(): JSX.Element {
         setTimeout(() => {
           inputRef.current!.focus();
 
-          setSearchText((prev) => prev + event.key);
-          inputRef.current!.value = inputRef.current!.value + event.key;
+          if ((event.keyCode >= 48 && event.keyCode <= 90) || (event.keyCode >= 96 && event.keyCode <= 105)) {
+            setSearchText((prev) => prev + event.key);
+            inputRef.current!.value = inputRef.current!.value + event.key;
+          }
         }, 1);
       }
     };
 
-    window.addEventListener('keypress', handleKeyPress);
+    window.addEventListener('keydown', handleKeyPress);
 
     return () => {
-      window.removeEventListener('keypress', handleKeyPress);
+      window.removeEventListener('keydown', handleKeyPress);
     };
   }, []);
 
