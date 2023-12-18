@@ -114,4 +114,5 @@ export const config: Config = {
   },
   pathDelimiter: '/',
   searchDelimiter: ' ',
+  renderCategoryTitle: false,
 };
