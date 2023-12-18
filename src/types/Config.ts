@@ -54,4 +54,9 @@ export interface Config {
    * link.
    */
   searchDelimiter: string;
+
+  /**
+   * Whether or not to render the category title.
+   */
+  renderCategoryTitle: boolean;
 }

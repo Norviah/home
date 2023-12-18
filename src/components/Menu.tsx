@@ -1,3 +1,4 @@
+import { Header } from '@/components/ui/Header';
 import { config } from '@/config';
 import { cn } from '@/utils/cn';
 
@@ -12,6 +13,7 @@ export function Menu(props: { className?: ClassNameValue }): JSX.Element {
       {entries.map(([category, commands]) => {
         return (
           <div key={category} className="flex flex-col gap-7">
+            {config.renderCategoryTitle && <Header type="h4">{category}</Header>}
             {commands.map((command: Command, index: number) => {
               return (
                 <a
