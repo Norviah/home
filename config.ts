@@ -26,11 +26,6 @@ export const config: Config = {
         url: 'https://linkedin.com',
         searchTemplate: '/search/results/all/?keywords={}',
       },
-      {
-        name: 'Monkey Type',
-        key: 'mt',
-        url: 'https://monkeytype.com',
-      },
     ],
     Dev: [
       {
@@ -81,11 +76,6 @@ export const config: Config = {
         url: 'https://anix.to/home',
         searchTemplate: '/filter?keyword={}',
       },
-      {
-        name: 'MyAnimeList',
-        key: 'myl',
-        url: 'https://myanimelist.net',
-      },
     ],
     'Social Media': [
       {
@@ -101,10 +91,15 @@ export const config: Config = {
         searchTemplate: '/search?q={}',
       },
       {
-        name: 'Instagram',
-        key: 'ig',
-        url: 'https://instagram.com',
-        searchTemplate: '/explore/tags/{}',
+        name: 'MyAnimeList',
+        key: 'myl',
+        url: 'https://myanimelist.net',
+      },
+      {
+        name: 'Media Hub',
+        key: 'mh',
+        url: 'https://mediahub.vercel.app',
+        searchTemplate: '/search?q={}&layout=list',
       },
     ],
   },
