@@ -92,13 +92,14 @@ export const config: Config = {
       },
       {
         name: 'MyAnimeList',
-        key: 'myl',
+        key: 'mal',
         url: 'https://myanimelist.net',
+        searchTemplate: '/anime.php?q={}',
       },
       {
-        name: 'Media Hub',
-        key: 'mh',
-        url: 'https://mediahub.vercel.app',
+        name: 'Nexus Mods',
+        key: 'nm',
+        url: 'https://www.nexusmods.com/',
         searchTemplate: '/search?q={}&layout=list',
       },
     ],
