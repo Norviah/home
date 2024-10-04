@@ -2,16 +2,22 @@
   "tasks": {
     "pre": [
       {
-        "name": "checking formatting",
-        "command": "pnpm run prettier:check"
-      },
-      {
-        "name": "checking linting",
-        "command": "pnpm run lint"
+        "name": "checking linting and formatting",
+        "command": "pnpm run biome"
       },
       {
         "name": "validating build",
         "command": "pnpm run build"
+      }
+    ],
+    "post": [
+      {
+        "name": "pushing to github",
+        "command": "git push"
+      },
+      {
+        "name": "pushing tags to github",
+        "command": "git push --tags"
       }
     ]
   },
@@ -38,7 +44,7 @@
     },
     {
       "type": "refactor",
-      "name": "Refactored",
+      "name": "Refactors",
       "hidden": false
     },
     {

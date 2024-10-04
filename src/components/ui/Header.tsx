@@ -1,9 +1,9 @@
-import { cn } from '@/utils/cn';
+import { cn } from '@/lib/utils';
 import { cva } from 'class-variance-authority';
 
 import type { VariantProps } from 'class-variance-authority';
 
-export const headerVariants = cva('scroll-m-20 text-foreground-pop', {
+export const headerVariants = cva('scroll-m-20', {
   variants: {
     type: {
       h1: 'text-4xl font-extrabold lg:text-5xl',
@@ -31,7 +31,7 @@ export function Header(props: HeaderProps): JSX.Element {
         headerVariants({
           type: props.type,
         }),
-        props.className
+        props.className,
       )}
     >
       {props.children}
