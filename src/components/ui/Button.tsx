@@ -22,7 +22,8 @@ const buttonVariants = cva(
         outline:
           'border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground',
         secondary: 'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80',
-        ghost: 'hover:bg-accent hover:text-accent-foreground',
+        ghost:
+          'hover:bg-accent hover:text-accent-foreground hover:text-foreground transition-colors',
         link: 'text-primary underline-offset-4 hover:underline',
       },
       size: {
@@ -70,7 +71,7 @@ const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
   ({ className, icon: Icon, children, size = 'icon', ...props }, ref) => {
     return (
       <Button variant='outline' size={size} ref={ref} {...props}>
-        {Icon ? <Icon className='size-4 xl:mr-2' /> : children}
+        {Icon ? <Icon className='size-4' /> : children}
       </Button>
     );
   },
