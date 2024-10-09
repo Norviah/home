@@ -48,13 +48,13 @@ export function SettingsForm() {
           onChange={form.handleSubmit(onChange)}
           onReset={form.handleSubmit(onReset)}
         >
-          {/* <div className='flex flex-row items-center justify-between'>
+          <div className='flex flex-row items-center justify-between'>
             <div className='space-y-0.5 text-sm'>
               <p>Theme</p>
             </div>
 
             <ThemeSelector />
-          </div> */}
+          </div>
 
           <FormField
             control={form.control}

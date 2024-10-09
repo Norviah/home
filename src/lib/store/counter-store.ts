@@ -66,8 +66,14 @@ export const createConfigState = (initState: ConfigState = defaultInitState) => 
         },
 
         createCategory: (title) => {
+          const category: Omit<Category, 'index'> = {
+            title,
+            id: randomNumber(),
+            links: [],
+          };
+
           set((state) => ({
-            categories: [...state.categories, { title, id: randomNumber(), links: [] }],
+            categories: [...state.categories, { ...category, index: state.categories.length }],
           }));
         },
 
@@ -97,7 +103,7 @@ export const createConfigState = (initState: ConfigState = defaultInitState) => 
               if (cat.id === category) {
                 return {
                   ...cat,
-                  links: [...cat.links, { ...link, id: randomNumber() }],
+                  links: [...cat.links, { ...link, id: randomNumber(), index: cat.links.length }],
                 };
               }
 

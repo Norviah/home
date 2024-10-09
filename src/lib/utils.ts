@@ -151,6 +151,7 @@ export const defaultConfig: Config = {
     {
       title: 'Productivity',
       id: randomNumber(),
+      index: 0,
       links: [
         {
           name: 'GMail',
@@ -158,6 +159,7 @@ export const defaultConfig: Config = {
           url: 'https://gmail.com',
           query: '/#search/{}',
           id: randomNumber(),
+          index: 0,
         },
         {
           name: 'Google Drive',
@@ -165,6 +167,7 @@ export const defaultConfig: Config = {
           url: 'https://drive.google.com',
           query: '/drive/search?q={}',
           id: randomNumber(),
+          index: 1,
         },
         {
           name: 'LinkedIn',
@@ -172,6 +175,7 @@ export const defaultConfig: Config = {
           url: 'https://linkedin.com',
           query: '/search/results/all/?keywords={}',
           id: randomNumber(),
+          index: 2,
         },
       ],
     },
@@ -179,6 +183,7 @@ export const defaultConfig: Config = {
     {
       title: 'Entertainment',
       id: randomNumber(),
+      index: 1,
       links: [
         {
           name: 'YouTube',
@@ -186,6 +191,7 @@ export const defaultConfig: Config = {
           url: 'https://youtube.com',
           query: '/results?search_query={}',
           id: randomNumber(),
+          index: 0,
         },
         {
           name: 'Twitch',
@@ -193,6 +199,7 @@ export const defaultConfig: Config = {
           url: 'https://twitch.tv',
           query: '/search?term={}',
           id: randomNumber(),
+          index: 1,
         },
         {
           name: 'Netflix',
@@ -200,6 +207,7 @@ export const defaultConfig: Config = {
           url: 'https://netflix.com',
           query: '/search?q={}',
           id: randomNumber(),
+          index: 2,
         },
       ],
     },
@@ -207,6 +215,7 @@ export const defaultConfig: Config = {
     {
       title: 'Social Media',
       id: randomNumber(),
+      index: 2,
       links: [
         {
           name: 'Twitter',
@@ -214,6 +223,7 @@ export const defaultConfig: Config = {
           url: 'https://twitter.com',
           query: '/search?q={}',
           id: randomNumber(),
+          index: 0,
         },
         {
           name: 'Reddit',
@@ -221,12 +231,14 @@ export const defaultConfig: Config = {
           url: 'https://reddit.com',
           query: '/search?q={}',
           id: randomNumber(),
+          index: 1,
         },
         {
           name: 'Instagram',
           key: 'ig',
           url: 'https://instagram.com',
           id: randomNumber(),
+          index: 2,
         },
       ],
     },
