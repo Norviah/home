@@ -58,7 +58,7 @@ export function CreateLinkForm({ category, createLink }: CreateLinkFormProps) {
             render={({ field }) => (
               <FormItem className='w-20'>
                 <FormControl>
-                  <Input className='w-20' placeholder={'key'} {...field} />
+                  <Input className='w-20' placeholder={'Key'} {...field} />
                 </FormControl>
 
                 <FormMessage />
