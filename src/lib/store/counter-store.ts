@@ -148,7 +148,7 @@ export const createConfigState = (initState: ConfigState = defaultInitState) => 
         },
       }),
       {
-        name: 'counter-store',
+        name: 'store',
       },
     ),
   );
