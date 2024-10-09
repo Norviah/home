@@ -33,7 +33,7 @@ export default function ProfilePage() {
         <CreateCategoryForm config={config} {...rest} />
 
         {config.categories.length > 0 ? (
-          config.categories.reverse().map((category) => (
+          config.categories.map((category) => (
             <Card className='space-y-8 p-5' key={category.id}>
               <CategoryTitleForm category={category} config={config} {...rest} />
 
