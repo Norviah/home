@@ -10,6 +10,7 @@ export const Link = z.object({
   url: z.string().url(),
   query: z.string().optional(),
   id: Id,
+  index: z.number(),
 });
 
 export type Link = z.infer<typeof Link>;
@@ -18,6 +19,7 @@ export const Category = z.object({
   title: z.string(),
   links: z.array(Link),
   id: Id,
+  index: z.number(),
 });
 
 export type Category = z.infer<typeof Category>;
@@ -41,7 +43,7 @@ export type Config = z.infer<typeof Config>;
 export const TitleSchema = z.object({ title: z.string().min(1) });
 export type TitleSchema = z.infer<typeof TitleSchema>;
 
-export const LinkFormSchema = Link.omit({ id: true });
+export const LinkFormSchema = Link.omit({ id: true, index: true });
 export type LinkFormSchema = z.infer<typeof LinkFormSchema>;
 
 export const SearchSchema = z.object({ query: z.string() });
