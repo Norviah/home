@@ -16,6 +16,7 @@ export type ConfigActions = {
   createCategory: (title: string) => void;
   resetCategories: () => void;
   editCategoryTitle: (id: number, title: string) => void;
+  loadDefaultSettings: () => void;
   deleteCategory: (id: number) => void;
   createLink: (category: number, link: LinkFormSchema) => void;
   editLink: (category: number, link: number, args: LinkFormSchema) => void;
@@ -55,6 +56,16 @@ export const createConfigState = (initState: ConfigState = defaultInitState) => 
 
         loadDummyConfig: () => {
           set(() => defaultConfig);
+        },
+
+        loadDefaultSettings: () => {
+          set(() => ({
+            settings: {
+              searchEngine: 'https://encrypted.google.com/search?q={}',
+              pathDelimiter: '/',
+              title: false,
+            },
+          }));
         },
 
         resetCategories: () => {

@@ -25,7 +25,7 @@ import { useConfigStore } from '@/lib/store/counter-store-provider';
 import type { z } from 'zod';
 
 export function SettingsForm() {
-  const { settings, updateSettings } = useConfigStore((state) => state);
+  const { settings, updateSettings, loadDefaultSettings } = useConfigStore((state) => state);
 
   const { form } = useForm<Settings>({
     schema: Settings,
@@ -37,7 +37,7 @@ export function SettingsForm() {
   }
 
   function onReset() {
-    updateSettings(defaultConfig);
+    loadDefaultSettings();
   }
 
   return (

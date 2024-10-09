@@ -9,11 +9,14 @@ import {
 } from '@/components/forms';
 import { Card } from '@/components/ui/Card';
 import { Header } from '@/components/ui/Header';
-
-import { useConfigStore } from '@/lib/store/counter-store-provider';
+import { useStore } from '@/hooks/useStore';
 
 export default function ProfilePage() {
-  const { categories } = useConfigStore((state) => state);
+  const { categories, render } = useStore();
+
+  if (!render) {
+    return <></>;
+  }
 
   return (
     <div className='space-y-10'>
