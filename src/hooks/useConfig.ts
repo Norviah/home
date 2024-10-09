@@ -28,7 +28,7 @@ export function useConfig(): UseConfig {
     const string = localStorage.getItem('config');
 
     if (!string) {
-      setConfig(defaultConfig);
+      setConfig({ ...defaultConfig, categories: [] });
     } else {
       setConfig(Config.parse(JSON.parse(string)));
     }
