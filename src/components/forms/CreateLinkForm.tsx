@@ -1,22 +1,22 @@
 'use client';
 import { Button } from '@/components/ui/Button';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/Form';
-import { Header } from '@/components/ui/Header';
 import { Input } from '@/components/ui/Input';
-import { CheckIcon, CirclePlusIcon, EditIcon, TrashIcon, XIcon } from 'lucide-react';
+import { CirclePlusIcon } from 'lucide-react';
 
 import { useForm } from '@/hooks/useForm';
 import { LinkFormSchema } from '@/lib/schemas';
+import { useConfigStore } from '@/lib/store/counter-store-provider';
 
-import type { UseConfig } from '@/hooks/useConfig';
-import type { Category, Link } from '@/lib/schemas';
-import type { With } from '@/types';
+import type { Category } from '@/lib/schemas';
 
-export type CreateLinkFormProps = With<UseConfig, 'config'> & {
+export type CreateLinkFormProps = {
   category: Category;
 };
 
-export function CreateLinkForm({ category, createLink }: CreateLinkFormProps) {
+export function CreateLinkForm({ category }: CreateLinkFormProps) {
+  const { createLink } = useConfigStore((state) => state);
+
   const { form } = useForm<LinkFormSchema>({
     schema: LinkFormSchema,
   });
@@ -58,7 +58,7 @@ export function CreateLinkForm({ category, createLink }: CreateLinkFormProps) {
             render={({ field }) => (
               <FormItem className='w-20'>
                 <FormControl>
-                  <Input className='w-20' placeholder={'key'} {...field} />
+                  <Input className='w-20' placeholder={'Key'} {...field} />
                 </FormControl>
 
                 <FormMessage />

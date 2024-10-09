@@ -9,20 +9,16 @@ import { CheckIcon, EditIcon, TrashIcon, XIcon } from 'lucide-react';
 import { useForm } from '@/hooks/useForm';
 import { TitleSchema } from '@/lib/schemas';
 import { useState } from 'react';
+import { useConfigStore } from '@/lib/store/counter-store-provider';
 
-import type { UseConfig } from '@/hooks/useConfig';
 import type { Category } from '@/lib/schemas';
-import type { With } from '@/types';
 
-export type CategoryTitleFormProps = With<UseConfig, 'config'> & {
+export type CategoryTitleFormProps = {
   category: Category;
 };
 
-export function CategoryTitleForm({
-  category,
-  editCategory,
-  deleteCategory,
-}: CategoryTitleFormProps) {
+export function CategoryTitleForm({ category }: CategoryTitleFormProps) {
+  const { editCategoryTitle, deleteCategory } = useConfigStore((state) => state);
   const [state, setState] = useState<'VIEW' | 'EDIT'>('VIEW');
 
   const { form } = useForm<TitleSchema>({
@@ -31,7 +27,7 @@ export function CategoryTitleForm({
   });
 
   function onSubmit(values: TitleSchema) {
-    editCategory(category.id, 'title', values.title);
+    editCategoryTitle(category.id, values.title);
     setState('VIEW');
   }
 
