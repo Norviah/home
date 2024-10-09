@@ -1,12 +1,14 @@
 import type { Config } from 'tailwindcss';
 
-const config: Config = {
+const config = {
   darkMode: ['class'],
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './pages/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}',
   ],
+  prefix: '',
   theme: {
     container: {
       center: true,
@@ -16,28 +18,18 @@ const config: Config = {
       },
     },
     extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-      },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
-        background: 'hsl(var(--background))',
-        'nord-red': 'hsl(var(--nord-red))',
-        'nord-orange': 'hsl(var(--nord-orange))',
-        'nord-yellow': 'hsl(var(--nord-yellow))',
-        'nord-green': 'hsl(var(--nord-green))',
-        'nord-blue-green': 'hsl(var(--nord-blue-green))',
-        'nord-light-blue': 'hsl(var(--nord-light-blue))',
-        'nord-blue': 'hsl(var(--nord-blue))',
-        'nord-dark-blue': 'hsl(var(--nord-dark-blue))',
-        'nord-purple': 'hsl(var(--nord-purple))',
+        background: {
+          DEFAULT: 'hsl(var(--background))',
+        },
         foreground: {
           DEFAULT: 'hsl(var(--foreground))',
-          accent: 'hsl(var(--foreground-accent))',
-          selected: 'hsl(var(--foreground-selected))',
+          lighter: 'hsl(var(--foreground-lighter))',
+          light: 'hsl(var(--foreground-light))',
+          muted: 'hsl(var(--foreground-muted))',
         },
         primary: {
           DEFAULT: 'hsl(var(--primary))',
@@ -51,13 +43,21 @@ const config: Config = {
           DEFAULT: 'hsl(var(--destructive))',
           foreground: 'hsl(var(--destructive-foreground))',
         },
-        success: {
-          DEFAULT: 'hsl(var(--success))',
-          foreground: 'hsl(var(--success-foreground))',
+        danger: {
+          DEFAULT: 'hsl(var(--danger))',
+          foreground: 'hsl(var(--danger-foreground))',
         },
         warn: {
           DEFAULT: 'hsl(var(--warn))',
           foreground: 'hsl(var(--warn-foreground))',
+        },
+        success: {
+          DEFAULT: 'hsl(var(--success))',
+          foreground: 'hsl(var(--success-foreground))',
+        },
+        info: {
+          DEFAULT: 'hsl(var(--info))',
+          foreground: 'hsl(var(--info-foreground))',
         },
         muted: {
           DEFAULT: 'hsl(var(--muted))',
@@ -70,8 +70,6 @@ const config: Config = {
         card: {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
-          accent: 'hsl(var(--card-accent))',
-          selected: 'hsl(var(--card-selected))',
         },
       },
       borderRadius: {
@@ -81,20 +79,12 @@ const config: Config = {
       },
       keyframes: {
         'accordion-down': {
-          from: {
-            height: '0',
-          },
-          to: {
-            height: 'var(--radix-accordion-content-height)',
-          },
+          from: { height: '0' },
+          to: { height: 'var(--radix-accordion-content-height)' },
         },
         'accordion-up': {
-          from: {
-            height: 'var(--radix-accordion-content-height)',
-          },
-          to: {
-            height: '0',
-          },
+          from: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: '0' },
         },
       },
       animation: {
@@ -104,6 +94,6 @@ const config: Config = {
     },
   },
   plugins: [require('tailwindcss-animate')],
-};
+} satisfies Config;
 
 export default config;

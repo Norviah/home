@@ -1,8 +1,8 @@
 'use client';
 
-import { ThemeProvider as NextThemesProvider } from 'next-themes';
+import { ThemeProvider as BaseThemeProvider } from 'next-themes';
 import type { ThemeProviderProps } from 'next-themes/dist/types';
 
 export function ThemeProvider({ children, ...props }: ThemeProviderProps): JSX.Element {
-  return <NextThemesProvider {...props}>{children}</NextThemesProvider>;
+  return <BaseThemeProvider {...props}>{children}</BaseThemeProvider>;
 }

@@ -1,9 +1,0 @@
-{
-  "trailingComma": "es5",
-  "parser": "typescript",
-  "printWidth": 125,
-  "singleQuote": true,
-  "plugins": [
-    "prettier-plugin-tailwindcss"
-  ]
-}
