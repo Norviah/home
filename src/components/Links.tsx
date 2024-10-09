@@ -1,11 +1,16 @@
 'use client';
 
 import { InlineLink } from '@/components/ui/InlineLink';
+import { useStore } from '@/hooks/useStore';
 import { useConfigStore } from '@/lib/store/counter-store-provider';
 import { useEffect } from 'react';
 
 export function Links() {
-  const { loadDummyConfig, categories, settings } = useConfigStore((state) => state);
+  const { loadDummyConfig, categories, settings, render } = useStore();
+
+  if (!render) {
+    return <></>;
+  }
 
   const filteredCategories = categories.filter((category) => {
     return category.links.length > 0;
