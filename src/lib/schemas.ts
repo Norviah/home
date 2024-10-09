@@ -43,3 +43,6 @@ export type TitleSchema = z.infer<typeof TitleSchema>;
 
 export const LinkFormSchema = Link.omit({ id: true });
 export type LinkFormSchema = z.infer<typeof LinkFormSchema>;
+
+export const SearchSchema = z.object({ query: z.string() });
+export type SearchSchema = z.infer<typeof SearchSchema>;

@@ -1,9 +1,5 @@
-import { Links } from '@/components/Links';
+import { SearchInput } from '@/components/SearchInput';
 
 export default function Home(): JSX.Element {
-  return (
-    <div className='flex h-screen items-center justify-center'>
-      <Links />
-    </div>
-  );
+  return <SearchInput />;
 }

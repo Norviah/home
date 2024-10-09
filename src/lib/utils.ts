@@ -46,6 +46,103 @@ export function randomNumber(min = 0, max = Number.MAX_SAFE_INTEGER): number {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
+/**
+ * Determines if the string is a URL.
+ *
+ * @param string The string to check.
+ * @returns Whether if the string is a URL.
+ * @example
+ *
+ * ```ts
+ * isUrl('https://google.com'); // true
+ * isUrl('google.com');         // true
+ * isUrl('google');             // false
+ * ```
+ */
+function isUrl(string: string): boolean {
+  return /^((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)$/i.test(string);
+}
+
+/**
+ * Assuming the provided string is a URL, determines if it has a protocol.
+ *
+ * @param url The url to check.
+ * @returns Whether if the URL has a protocol.
+ * @example
+ *
+ * ```ts
+ * hasProtocol('https://google.com'); // true
+ * hasProtocol('google.com'); // false
+ * ```
+ */
+function hasProtocol(url: string): boolean {
+  return /^[a-zA-Z]+:\/\//i.test(url);
+}
+
+/**
+ * Constructs a URL inferred from the query and the user's configuration.
+ *
+ * This function attempts to parse provided query and translate it into a URL
+ * based on the user's configuration. Generally, it will follow these rules:
+ *
+ *   1. If the query is a URL, it will be returned.
+ *   2. If the query is a link from the user's configuration, it will be further parsed and constructed.
+ *      - If the link has no query or paths, it will be returned as is. <br /><br>
+ *      - If the link has a query and/or paths, it will be appended to the URL.
+ *   3. If the query is not a link, it will be searched using the specified search
+ *      engine.
+ *
+ * @param config The user's configuration, which contains the links to parse
+ * from.
+ * @param raw The raw query to construct the URL from.
+ * @returns The constructed URL.
+ * @example
+ *
+ * For example, let's say we have the links `tt` for twitter and `rd` for
+ * reddit and Google as the search engine.
+ *
+ * Here are the results of the following queries when passed into this function:
+ * - `tt`: `https://twitter.com`
+ * - `tt/user`: `https://twitter.com/user`
+ * - `tt term`: `https://twitter.com/search?q=term`
+ *
+ * - `rd`: `https://reddit.com`
+ * - `rd/r/subreddit`: `https://reddit.com/r/subreddit`
+ * - `rd/r/subreddit term`: `https://reddit.com/r/subreddit/search?q=term`
+ *
+ * - `search term`: `https://encrypted.google.com/search?q=search term`
+ * - `github.com`: `https://github.com`
+ */
+export function generateUrl(config: Config, raw: string): string {
+  const query: string = raw.trim();
+
+  if (isUrl(query)) {
+    return hasProtocol(query) ? query : `https://${query}`;
+  }
+
+  const [searchKeyRaw, rawSearch] = query.split(/ (.*)/);
+  const [searchKey, paths] = searchKeyRaw.split(new RegExp(`${config.pathDelimiter}(.*)`));
+
+  const allLinks = config.categories.flatMap((category) => category.links);
+  const link = allLinks.find((link) => link.key.toLowerCase() === searchKey.toLowerCase());
+
+  if (!link) {
+    return `${config.searchEngine.replace(/{}/g, query)}`;
+  }
+
+  const url = new URL(link.url);
+
+  const string = [
+    url.protocol,
+    '//',
+    url.host,
+    (paths ? `${paths.startsWith('/') ? '' : '/'}${paths}` : '') || undefined,
+    (link.query && rawSearch ? link.query.replace(/{}/g, rawSearch) : '') || undefined,
+  ];
+
+  return string.filter(Boolean).join('');
+}
+
 export const defaultConfig: Config = {
   searchEngine: 'https://encrypted.google.com/search?q={}',
   pathDelimiter: '/',

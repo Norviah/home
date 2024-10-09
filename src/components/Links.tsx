@@ -1,11 +1,9 @@
 'use client';
 
 import { InlineLink } from '@/components/ui/InlineLink';
-import { useConfig } from '@/hooks/useConfig';
+import type { UseConfig } from '@/hooks/useConfig';
 
-export function Links(): JSX.Element | null {
-  const { config, loadDummyConfig } = useConfig();
-
+export function Links({ config, loadDummyConfig }: Pick<UseConfig, 'config' | 'loadDummyConfig'>) {
   if (!config) {
     return <></>;
   }
