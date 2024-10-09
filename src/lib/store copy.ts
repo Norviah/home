@@ -52,7 +52,10 @@ export const useConfigStore = create<ConfigStore>()(
 
       createCategory: (title) => {
         set((state) => ({
-          categories: [...state.categories, { title, id: randomNumber(), links: [] }],
+          categories: [
+            ...state.categories,
+            { title, id: randomNumber(), links: [], index: state.categories.length },
+          ],
         }));
       },
 
@@ -82,7 +85,7 @@ export const useConfigStore = create<ConfigStore>()(
             if (cat.id === category) {
               return {
                 ...cat,
-                links: [...cat.links, { ...link, id: randomNumber() }],
+                links: [...cat.links, { ...link, id: randomNumber(), index: cat.links.length }],
               };
             }
 
