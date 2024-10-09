@@ -7,11 +7,11 @@ import { PlusCircleIcon } from 'lucide-react';
 
 import { useForm } from '@/hooks/useForm';
 import { TitleSchema } from '@/lib/schemas';
+import { useConfigStore } from '@/lib/store/counter-store-provider';
 
-import type { UseConfig } from '@/hooks/useConfig';
-import type { With } from '@/types';
+export function CreateCategoryForm() {
+  const { createCategory } = useConfigStore((state) => state);
 
-export function CreateCategoryForm({ createCategory }: With<UseConfig, 'config'>) {
   const { form } = useForm<TitleSchema>({
     schema: TitleSchema,
   });

@@ -7,24 +7,25 @@ import { CheckIcon, TrashIcon, XIcon } from 'lucide-react';
 
 import { useForm } from '@/hooks/useForm';
 import { LinkFormSchema } from '@/lib/schemas';
+import { useConfigStore } from '@/lib/store/counter-store-provider';
 
-import type { UseConfig } from '@/hooks/useConfig';
 import type { Category, Link } from '@/lib/schemas';
-import type { With } from '@/types';
 
-export type EditLinkFormProps = With<UseConfig, 'config'> & {
+export type EditLinkFormProps = {
   link: Link;
   category: Category;
 };
 
-export function EditLinkForm({ link, category, editLink, deleteLink }: EditLinkFormProps) {
+export function EditLinkForm({ link, category }: EditLinkFormProps) {
+  const { editLink, deleteLink } = useConfigStore((state) => state);
+
   const { form } = useForm<LinkFormSchema>({
     schema: LinkFormSchema,
     defaultValues: link,
   });
 
   function onSubmit(values: LinkFormSchema) {
-    editLink({ category: category.id, ...values, id: link.id });
+    editLink(category.id, link.id, values);
   }
 
   function onDelete() {

@@ -1,18 +1,17 @@
 'use client';
 
 import { InlineLink } from '@/components/ui/InlineLink';
-import type { UseConfig } from '@/hooks/useConfig';
+import { useConfigStore } from '@/lib/store/counter-store-provider';
+import { useEffect } from 'react';
 
-export function Links({ config, loadDummyConfig }: Pick<UseConfig, 'config' | 'loadDummyConfig'>) {
-  if (!config) {
-    return <></>;
-  }
+export function Links() {
+  const { loadDummyConfig, categories, settings } = useConfigStore((state) => state);
 
-  const categories = config.categories.filter((category) => {
+  const filteredCategories = categories.filter((category) => {
     return category.links.length > 0;
   });
 
-  if (!categories.length) {
+  if (!filteredCategories.length) {
     return (
       <div className='max-w-md space-y-1 text-lg'>
         <p>You have no links saved.</p>
@@ -30,12 +29,12 @@ export function Links({ config, loadDummyConfig }: Pick<UseConfig, 'config' | 'l
     <div
       className='grid gap-20'
       style={{
-        gridTemplateColumns: `repeat(${categories.length}, minmax(0, 1fr)`,
+        gridTemplateColumns: `repeat(${filteredCategories.length}, minmax(0, 1fr)`,
       }}
     >
-      {categories.map((category) => (
+      {filteredCategories.map((category) => (
         <div className='flex flex-col gap-3' key={category.id}>
-          {config.title && <p>{category.title}</p>}
+          {settings.title && <p>{category.title}</p>}
 
           <div className='flex flex-col gap-5'>
             {category.links.map((link) => (

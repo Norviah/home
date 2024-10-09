@@ -20,23 +20,24 @@ import { Switch } from '@/components/ui/Switch';
 import { useForm } from '@/hooks/useForm';
 import { Settings } from '@/lib/schemas';
 import { defaultConfig } from '@/lib/utils';
+import { useConfigStore } from '@/lib/store/counter-store-provider';
 
-import type { UseConfig } from '@/hooks/useConfig';
-import type { With } from '@/types';
 import type { z } from 'zod';
 
-export function SettingsForm({ config, updateConfig }: With<UseConfig, 'config'>) {
+export function SettingsForm() {
+  const { settings, updateSettings } = useConfigStore((state) => state);
+
   const { form } = useForm<Settings>({
     schema: Settings,
-    defaultValues: config,
+    defaultValues: settings,
   });
 
   function onChange(values: z.infer<typeof Settings>) {
-    updateConfig({ ...config, ...values });
+    updateSettings(values);
   }
 
   function onReset() {
-    updateConfig({ ...defaultConfig, categories: config.categories });
+    updateSettings(defaultConfig);
   }
 
   return (
@@ -47,13 +48,13 @@ export function SettingsForm({ config, updateConfig }: With<UseConfig, 'config'>
           onChange={form.handleSubmit(onChange)}
           onReset={form.handleSubmit(onReset)}
         >
-          <div className='flex flex-row items-center justify-between'>
+          {/* <div className='flex flex-row items-center justify-between'>
             <div className='space-y-0.5 text-sm'>
               <p>Theme</p>
             </div>
 
             <ThemeSelector />
-          </div>
+          </div> */}
 
           <FormField
             control={form.control}
@@ -90,7 +91,7 @@ export function SettingsForm({ config, updateConfig }: With<UseConfig, 'config'>
                 </FormLabel>
 
                 <FormControl>
-                  <Input placeholder={config?.searchEngine} {...field} />
+                  <Input placeholder={settings?.searchEngine} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -118,7 +119,7 @@ export function SettingsForm({ config, updateConfig }: With<UseConfig, 'config'>
                 </FormLabel>
 
                 <FormControl>
-                  <Input placeholder={config?.pathDelimiter} {...field} />
+                  <Input placeholder={settings?.pathDelimiter} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

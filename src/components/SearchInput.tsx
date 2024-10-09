@@ -2,12 +2,12 @@
 
 import { Links } from './Links';
 
-import { useConfig } from '@/hooks/useConfig';
 import { SearchSchema } from '@/lib/schemas';
 import { defaultConfig, generateUrl } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useConfigStore } from '@/lib/store/counter-store-provider';
 
 export function SearchInput(): JSX.Element {
   const [query, setQuery] = useState('');
@@ -18,7 +18,7 @@ export function SearchInput(): JSX.Element {
     defaultValues: { query: '' },
   });
 
-  const { config, loadDummyConfig } = useConfig();
+  const { categories, loadDummyConfig, settings } = useConfigStore((state) => state);
   const { ref, ...rest } = form.register('query');
 
   function close() {
@@ -28,7 +28,7 @@ export function SearchInput(): JSX.Element {
   }
 
   function onSubmit({ query }: SearchSchema) {
-    window.location.href = generateUrl(config ?? { ...defaultConfig, categories: [] }, query);
+    window.location.href = generateUrl({ categories, ...settings }, query);
   }
 
   function onChange({ query }: SearchSchema) {
@@ -88,7 +88,7 @@ export function SearchInput(): JSX.Element {
 
       {query.length === 0 && (
         <div className='absolute inset-0 flex items-center justify-center'>
-          <Links config={config} loadDummyConfig={loadDummyConfig} />
+          <Links />
         </div>
       )}
     </>

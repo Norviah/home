@@ -10,45 +10,35 @@ import {
 import { Card } from '@/components/ui/Card';
 import { Header } from '@/components/ui/Header';
 
-import { useConfig } from '@/hooks/useConfig';
+import { useConfigStore } from '@/lib/store/counter-store-provider';
 
 export default function ProfilePage() {
-  const { config, ...rest } = useConfig();
-
-  if (!config) {
-    return null;
-  }
+  const { categories } = useConfigStore((state) => state);
 
   return (
     <div className='space-y-10'>
       <div className='space-y-5'>
         <Header type='h2'>Settings</Header>
 
-        <SettingsForm config={config} {...rest} />
+        <SettingsForm />
       </div>
 
       <div className='space-y-5'>
         <Header type='h2'>Categories</Header>
 
-        <CreateCategoryForm config={config} {...rest} />
+        <CreateCategoryForm />
 
-        {config.categories.length > 0 ? (
-          config.categories.reverse().map((category) => (
+        {categories.length > 0 ? (
+          categories.map((category) => (
             <Card className='space-y-8 p-5' key={category.id}>
-              <CategoryTitleForm category={category} config={config} {...rest} />
+              <CategoryTitleForm category={category} />
 
-              <CreateLinkForm category={category} config={config} {...rest} />
+              <CreateLinkForm category={category} />
 
               {category.links.length > 0 ? (
                 <div className='space-y-3'>
                   {category.links.map((link) => (
-                    <EditLinkForm
-                      category={category}
-                      config={config}
-                      link={link}
-                      {...rest}
-                      key={link.id}
-                    />
+                    <EditLinkForm category={category} link={link} key={link.id} />
                   ))}
                 </div>
               ) : (
