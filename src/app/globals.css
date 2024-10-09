@@ -255,9 +255,9 @@
   }
 
   .dark {
-    --background: 0 0% 9%;
-  /* --background:var(--colors-gray-dark-200); */
+    /* --background:var(--colors-gray-dark-200); */
     --background:  240 6% 10%;
+    --background: 0 0% 9%;
     --foreground: 0 0% 93%;
     --foreground-light: 0 0% 70%;
     --foreground-lighter: 0 0% 50%;
