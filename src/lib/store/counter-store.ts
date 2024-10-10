@@ -22,6 +22,7 @@ export type ConfigActions = {
   editLink: (category: number, link: number, args: LinkFormSchema) => void;
   deleteLink: (category: number, link: number) => void;
   loadDummyConfig: () => void;
+  moveLink: (category: number, source: number, destination: number) => void;
 };
 
 export type ConfigStore = ConfigState & ConfigActions;
@@ -161,6 +162,31 @@ export const createConfigState = (initState: ConfigState = defaultInitState) => 
             });
 
             return { categories: newCategories };
+          });
+        },
+
+        moveLink: (category: number, sourceIndex: number, destinationIndex: number) => {
+          set((state) => {
+            const p = state.categories.find((c) => c.id === category);
+
+            if (!p) {
+              return state;
+            }
+
+            const copy = [...p.links];
+
+            const [element] = copy.splice(sourceIndex, 1);
+            copy.splice(destinationIndex, 0, element);
+
+            return {
+              categories: state.categories.map((c) => {
+                if (c.id === category) {
+                  return { ...c, links: copy };
+                }
+
+                return c;
+              }),
+            };
           });
         },
       }),
