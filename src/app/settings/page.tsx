@@ -7,6 +7,7 @@ import {
   EditLinkForm,
   SettingsForm,
 } from '@/components/forms';
+import { CategoryLinks } from '@/components/forms/CategoryLinks';
 import { Card } from '@/components/ui/Card';
 import { Header } from '@/components/ui/Header';
 import { useStore } from '@/hooks/useStore';
@@ -38,15 +39,7 @@ export default function ProfilePage() {
 
               <CreateLinkForm category={category} />
 
-              {category.links.length > 0 ? (
-                <div className='space-y-3'>
-                  {category.links.map((link) => (
-                    <EditLinkForm category={category} link={link} key={link.id} />
-                  ))}
-                </div>
-              ) : (
-                <p>No links.</p>
-              )}
+              {category.links.length > 0 ? <CategoryLinks category={category} /> : <p>No links.</p>}
             </Card>
           ))
         ) : (
@@ -56,3 +49,9 @@ export default function ProfilePage() {
     </div>
   );
 }
+
+// <div className='space-y-3'>
+//   {category.links.map((link) => (
+//     <EditLinkForm category={category} link={link} key={link.id} />
+//   ))}
+// </div>
