@@ -156,7 +156,7 @@ export function generateUrl(config: Config, raw: string): string {
   const link = allLinks.find((link) => link.key.toLowerCase() === searchKey.toLowerCase());
 
   if (!link) {
-    return `${config.searchEngine.replace(/{}/g, query)}`;
+    return `${config.searchEngine.replace(/{}/g, encodeURI(query))}`;
   }
 
   const url = new URL(link.url);
