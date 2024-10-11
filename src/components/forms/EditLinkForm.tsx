@@ -1,5 +1,6 @@
 'use client';
 
+import { Prompt } from '@/components/Prompt';
 import { Button } from '@/components/ui/Button';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/Form';
 import { Input } from '@/components/ui/Input';
@@ -10,7 +11,7 @@ import { LinkFormSchema } from '@/lib/schemas';
 import { useConfigStore } from '@/lib/store/counter-store-provider';
 
 import type { Category, Link } from '@/lib/schemas';
-import type { DraggableProvided, DroppableProvided } from '@hello-pangea/dnd';
+import type { DraggableProvided } from '@hello-pangea/dnd';
 
 export type EditLinkFormProps = {
   link: Link;
@@ -127,9 +128,17 @@ export function EditLinkForm({ link, category, provided }: EditLinkFormProps) {
               <XIcon className='size-4' />
             </Button>
 
-            <Button className='p-2' type='button' variant={'destructive'} onClick={onDelete}>
-              <TrashIcon className='size-4' />
-            </Button>
+            <Prompt
+              title='Delete Link'
+              text={
+                <>
+                  Are you sure you want to delete the link{' '}
+                  <span className='text-foreground'>{link.name}</span>?
+                </>
+              }
+              onClick={onDelete}
+              icon={<TrashIcon className='size-4' />}
+            />
           </div>
         </form>
       </Form>

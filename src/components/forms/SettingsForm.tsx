@@ -1,7 +1,7 @@
 'use client';
 
+import { Prompt } from '@/components/Prompt';
 import { ThemeSelector } from '@/components/ThemeSelector';
-import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import {
   Form,
@@ -19,7 +19,6 @@ import { Switch } from '@/components/ui/Switch';
 
 import { useForm } from '@/hooks/useForm';
 import { Settings } from '@/lib/schemas';
-import { defaultConfig } from '@/lib/utils';
 import { useConfigStore } from '@/lib/store/counter-store-provider';
 
 import type { z } from 'zod';
@@ -41,7 +40,7 @@ export function SettingsForm() {
   }
 
   return (
-    <Card className='p-6'>
+    <Card className='space-y-7 p-6'>
       <Form {...form}>
         <form
           className='space-y-7'
@@ -125,14 +124,18 @@ export function SettingsForm() {
               </FormItem>
             )}
           />
-
-          <div className='flex justify-end gap-2'>
-            <Button variant='destructive' type='reset'>
-              Reset
-            </Button>
-          </div>
         </form>
       </Form>
+
+      <div className='flex justify-end gap-2'>
+        <Prompt
+          title='Reset settings'
+          text='Are you sure you want to reset the settings?'
+          type='reset'
+          icon='Reset'
+          onClick={onReset}
+        />
+      </div>
     </Card>
   );
 }

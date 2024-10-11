@@ -1,5 +1,6 @@
 'use client';
 
+import { Prompt } from '@/components/Prompt';
 import { Button } from '@/components/ui/Button';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/Form';
 import { Header } from '@/components/ui/Header';
@@ -8,8 +9,8 @@ import { CheckIcon, EditIcon, GripVerticalIcon, TrashIcon, XIcon } from 'lucide-
 
 import { useForm } from '@/hooks/useForm';
 import { TitleSchema } from '@/lib/schemas';
-import { useState } from 'react';
 import { useConfigStore } from '@/lib/store/counter-store-provider';
+import { useState } from 'react';
 
 import type { Category } from '@/lib/schemas';
 import type { DraggableProvided } from '@hello-pangea/dnd';
@@ -105,9 +106,12 @@ export function CategoryTitleForm({ category, provided }: CategoryTitleFormProps
             {state === 'VIEW' ? <EditIcon className='size-4' /> : <XIcon className='size-4' />}
           </Button>
 
-          <Button className='p-2' type='button' variant={'destructive'} onClick={onDelete}>
-            <TrashIcon className='size-4' />
-          </Button>
+          <Prompt
+            title='Delete category'
+            text='Are you sure you want to delete this category?'
+            onClick={onDelete}
+            icon={<TrashIcon className='size-4' />}
+          />
         </div>
       </form>
     </Form>
