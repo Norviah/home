@@ -129,8 +129,8 @@ export function SettingsForm() {
 
       <div className='flex justify-end gap-2'>
         <Prompt
-          title='Reset settings'
-          text='Are you sure you want to reset the settings?'
+          title='Reset Settings'
+          text='Are you sure you want to reset settings?'
           type='reset'
           icon='Reset'
           onClick={onReset}

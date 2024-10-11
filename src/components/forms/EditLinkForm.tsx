@@ -134,7 +134,7 @@ export function EditLinkForm({ link, category, provided }: EditLinkFormProps) {
               title='Delete Link'
               text={
                 <>
-                  Are you sure you want to delete the link{' '}
+                  Are you sure you want to delete{' '}
                   <span className='text-foreground'>{link.name}</span>?
                 </>
               }
