@@ -1,5 +1,65 @@
 ## Unreleased
 
+### Features
+
+- **schema**: ensure that `Link.query` has `{}` <code>[437ebd5](https://github.com/Norviah/home/commit/437ebd5782a5f8499907b7ce4c9739879f37d369)</code>
+
+- **settings**: add a component to prompt the user before taking a destructive action <code>[d89d73d](https://github.com/Norviah/home/commit/d89d73d6a5e0989bf5ff77a6a02851d3f3fcbaaf)</code>
+
+- **settings**: add sorting for categories <code>[6358d92](https://github.com/Norviah/home/commit/6358d9297460d3ce347328e2b6387f58c9ae79cd)</code>
+
+- **settings**: add sorting functionality for links <code>[52c7a75](https://github.com/Norviah/home/commit/52c7a7504d60abfa07e2bb56850b63c17e30d1a1)</code>
+
+- **store**: add a function to move a link to a specific index <code>[4aa83ac](https://github.com/Norviah/home/commit/4aa83ac8c44d8d82507f895a0db8b9097f4bd7db)</code>
+
+- add a hook to prevent rendering until values are loaded to prevent flashing of wrong data <code>[c5fe2dc](https://github.com/Norviah/home/commit/c5fe2dca5ff0d3d8f4ce69bb7b12d4f5522a8c2c)</code>
+
+- **store**: add a function to reset settings <code>[900e4e5](https://github.com/Norviah/home/commit/900e4e551461219f7965b1742abb1df368d2e64c)</code>
+
+- **store**: add an index variable for categories and links <code>[784da63](https://github.com/Norviah/home/commit/784da63541cd4e3378cfcce9382d210d51914b90)</code>
+
+- add zustand for state management <code>[d29eb56](https://github.com/Norviah/home/commit/d29eb56a6a50b2cfe762f354da9fdb7bdeedeed1)</code>
+
+- add a search input <code>[a034c76](https://github.com/Norviah/home/commit/a034c76563f7a3131a47839950c581f577b38fc1)</code>
+
+- add config management <code>[472b7e0](https://github.com/Norviah/home/commit/472b7e0b3ef08c630677764cc169047d73ca9b0b)</code>
+
+- **components/ui**: add a component to render inline links <code>[6d7bfb3](https://github.com/Norviah/home/commit/6d7bfb38688a93c2ab126babdc505380f3cc94b7)</code>
+
+- **components/ui**: add a component to render inline code <code>[e0d69cd](https://github.com/Norviah/home/commit/e0d69cd1fe79ebb67fa8d918305c23f56b00a2bf)</code>
+
+- **types**: add utils for typings <code>[9efed2a](https://github.com/Norviah/home/commit/9efed2af8ea26b5a72c0f52f2515ab4d457c8b04)</code>
+
+- **routes**: add `/settings` <code>[6bd9edc](https://github.com/Norviah/home/commit/6bd9edc62e598fd937db1d705b72c052bb30abfb)</code>
+
+- **components**: add a component to render an icon link in top-right corner <code>[60d7caa](https://github.com/Norviah/home/commit/60d7caa66ea01107521a86ec89bb0ce985c2209d)</code>
+
+### UI
+
+- **settings**: ensure all input/buttons for edit link components are aligned to the start <code>[9edb9b8](https://github.com/Norviah/home/commit/9edb9b8a86ed11175850a802477f6e7a487d2682)</code>
+
+- **settings**: decrease the spacing between categories <code>[283c7b7](https://github.com/Norviah/home/commit/283c7b7f2425afd10fd00191959f7b8b3511902b)</code>
+
+- **settings**: ensure placeholders have proper case <code>[39f0b65](https://github.com/Norviah/home/commit/39f0b65bd43ff54141452ead9b7cab20f0040be9)</code>
+
+- **components**: ensure `LinkIcon` renders above all elements <code>[10b85a1](https://github.com/Norviah/home/commit/10b85a16aaedea9114b15db353f702e4cc7b5c02)</code>
+
+- **components/ui**: set the default foreground color for cards to `foreground-light` <code>[66f4854](https://github.com/Norviah/home/commit/66f4854d162a610f47c69abd2ab87f2fe350dc8c)</code>
+
+- **theme**: darken background color for dark mode <code>[34f171c](https://github.com/Norviah/home/commit/34f171c37ea8dfae321414a3e3d79f5cd0b7e2c0)</code>
+
+- **components**: update ui components <code>[53facc6](https://github.com/Norviah/home/commit/53facc645f378d55a4a412b9f1fcf110e86d63c4)</code>
+
+- **theme**: update all theme colors <code>[9a444bc](https://github.com/Norviah/home/commit/9a444bcd5e2f95b08ffeba3e40711453a1e05a21)</code>
+
+### Refactors
+
+- **settings**: don't reverse the order of categories <code>[36c2dbe](https://github.com/Norviah/home/commit/36c2dbe311f384c6a75f9f644e217aaabcdb00ef)</code>
+
+- **config**: don't add categories when creating a default config <code>[779e9b5](https://github.com/Norviah/home/commit/779e9b5650f9529b3d1b56b69d14047e05d46444)</code>
+
+- **components**: refactor `ThemeSelector` into a select menu <code>[a7a9bcc](https://github.com/Norviah/home/commit/a7a9bcccaf8ffa01a1c12d8ca6c9972b716047be)</code>
+
 ### Init
 
 - initial commit <code>[00d2546](https://github.com/Norviah/home/commit/00d2546262073af2a432e6a68b282b359b6b46e2)</code>
