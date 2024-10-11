@@ -164,19 +164,21 @@ export function SearchInput(): JSX.Element {
                 const active = index === focusedSuggestion;
 
                 return (
-                  <p
+                  <a
+                    href={generateUrl({ categories, ...settings }, suggestion)}
                     key={suggestion}
                     className={cn(
-                      'p-2',
-                      active && 'group rounded bg-foreground-light text-background',
+                      'rounded p-2',
+                      !active && 'hover:bg-accent',
+                      active && 'bg-foreground-light text-background',
                     )}
                   >
                     {suggestionStartsWithQuery && <span>{query}</span>}
 
-                    <span className={cn(!active && 'text-foreground group:text-background')}>
+                    <span className={cn(!active && 'text-foreground')}>
                       {suggestionStartsWithQuery ? suggestion.slice(query.length) : suggestion}
                     </span>
-                  </p>
+                  </a>
                 );
               })}
           </div>
