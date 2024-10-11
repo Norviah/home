@@ -2,29 +2,35 @@
 
 import { Links } from './Links';
 
+import { useDebounce } from '@/hooks/useDebounce';
+import { useStore } from '@/hooks/useStore';
 import { SearchSchema } from '@/lib/schemas';
-import { defaultConfig, generateUrl } from '@/lib/utils';
+import { cn, generateUrl } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useConfigStore } from '@/lib/store/counter-store-provider';
 
 export function SearchInput(): JSX.Element {
   const [query, setQuery] = useState('');
+  const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [focusedSuggestion, setFocusedSuggestion] = useState<number | null>(null);
+
+  const debouncedQuery = useDebounce(query, 150);
   const inputRef = useRef<HTMLInputElement>(null);
+  const { categories, settings } = useStore();
 
   const form = useForm<SearchSchema>({
     resolver: zodResolver(SearchSchema),
     defaultValues: { query: '' },
   });
 
-  const { categories, loadDummyConfig, settings } = useConfigStore((state) => state);
   const { ref, ...rest } = form.register('query');
 
   function close() {
     setQuery('');
     inputRef.current?.blur();
     form.reset({ query: '' });
+    setSuggestions([]);
   }
 
   function onSubmit({ query }: SearchSchema) {
@@ -34,12 +40,54 @@ export function SearchInput(): JSX.Element {
   function onChange({ query }: SearchSchema) {
     setQuery(query);
 
+    if (suggestions.length) {
+      setSuggestions([]);
+    }
+
+    if (focusedSuggestion !== null) {
+      setFocusedSuggestion(null);
+    }
+
     if (query.length === 0) {
       close();
     }
   }
 
+  function focusSuggestion(key: string) {
+    const direction = key === 'ArrowDown' ? 1 : -1;
+    const nextIndexPoor =
+      focusedSuggestion === null
+        ? direction === 1
+          ? 0
+          : suggestions.length - 1
+        : focusedSuggestion + direction;
+
+    const nextIndex =
+      nextIndexPoor >= suggestions.length || nextIndexPoor < 0 ? null : nextIndexPoor;
+
+    setFocusedSuggestion(nextIndex);
+
+    if (nextIndex === null) {
+      inputRef.current?.focus();
+    } else {
+      inputRef.current?.blur();
+    }
+  }
+
   function handleKeyPress(event: KeyboardEvent) {
+    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+      event.preventDefault();
+      return focusSuggestion(event.key);
+    }
+
+    if (
+      event.key === 'Enter' &&
+      focusedSuggestion &&
+      !(document.activeElement === inputRef.current)
+    ) {
+      return onSubmit({ query: suggestions[focusedSuggestion] });
+    }
+
     const modifierKeys = ['Control', 'Meta', 'Alt', 'Shift', 'Enter'];
 
     if (event.key === 'Escape') {
@@ -64,11 +112,36 @@ export function SearchInput(): JSX.Element {
     };
   });
 
+  async function fetchSuggestions(query: string) {
+    const res = await fetch(`/api/suggestions?q=${query.trim()}`, {
+      method: 'GET',
+    });
+
+    const phrases = ((await res.json()) as { phrase: string }[])
+      .filter(({ phrase }) => phrase.trim() !== query.trim())
+      .slice(0, 4)
+      .map(({ phrase }) => phrase);
+
+    if (query === '') {
+      return;
+    }
+
+    setSuggestions(phrases);
+  }
+
+  useEffect(() => {
+    if (debouncedQuery.trim().length === 0) {
+      return;
+    }
+
+    fetchSuggestions(debouncedQuery);
+  }, [debouncedQuery]);
+
   return (
     <>
       <div className='flex h-screen w-full items-center justify-center'>
         <form
-          className='flex w-full flex-row items-center justify-between gap-10'
+          className='flex w-full flex-col items-center justify-between gap-2'
           onSubmit={form.handleSubmit(onSubmit)}
           onChange={form.handleSubmit(onChange)}
           autoComplete='off'
@@ -83,6 +156,30 @@ export function SearchInput(): JSX.Element {
             className='block w-[100%] appearance-none border-0 bg-transparent p-0 text-center font-bold text-6xl outline-none focus:ring-0'
             {...rest}
           />
+
+          <div className='flex h-9 flex-row items-center gap-8 text-xl'>
+            {query &&
+              suggestions.map((suggestion, index) => {
+                const suggestionStartsWithQuery = suggestion.startsWith(query);
+                const active = index === focusedSuggestion;
+
+                return (
+                  <p
+                    key={suggestion}
+                    className={cn(
+                      'p-2',
+                      active && 'group rounded bg-foreground-light text-background',
+                    )}
+                  >
+                    {suggestionStartsWithQuery && <span>{query}</span>}
+
+                    <span className={cn(!active && 'text-foreground group:text-background')}>
+                      {suggestionStartsWithQuery ? suggestion.slice(query.length) : suggestion}
+                    </span>
+                  </p>
+                );
+              })}
+          </div>
         </form>
       </div>
 
