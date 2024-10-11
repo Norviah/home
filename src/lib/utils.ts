@@ -176,6 +176,8 @@ export const defaultConfig: Config = {
   searchEngine: 'https://encrypted.google.com/search?q={}',
   pathDelimiter: '/',
   title: false,
+  suggestions: true,
+  suggestionsLimit: 5,
   categories: [
     {
       title: 'Productivity',

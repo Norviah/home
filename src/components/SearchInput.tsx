@@ -119,7 +119,7 @@ export function SearchInput(): JSX.Element {
 
     const phrases = ((await res.json()) as { phrase: string }[])
       .filter(({ phrase }) => phrase.trim() !== query.trim())
-      .slice(0, 4)
+      .slice(0, settings.suggestionsLimit)
       .map(({ phrase }) => phrase);
 
     if (query === '') {
@@ -130,7 +130,7 @@ export function SearchInput(): JSX.Element {
   }
 
   useEffect(() => {
-    if (debouncedQuery.trim().length === 0) {
+    if (debouncedQuery.trim().length === 0 || !settings.suggestions) {
       return;
     }
 

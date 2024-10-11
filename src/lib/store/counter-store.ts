@@ -2,7 +2,7 @@
 import { createStore } from 'zustand/vanilla';
 // import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import { defaultConfig, randomNumber } from '../utils';
+import { defaultConfig, pick, randomNumber } from '../utils';
 
 import type { Category, LinkFormSchema, Settings } from '../schemas';
 
@@ -34,6 +34,8 @@ export const initConfigState = (): ConfigState => {
       searchEngine: 'https://encrypted.google.com/search?q={}',
       pathDelimiter: '/',
       title: false,
+      suggestions: true,
+      suggestionsLimit: 4,
     },
 
     categories: [],
@@ -45,13 +47,15 @@ export const defaultInitState: ConfigState = {
     searchEngine: 'https://encrypted.google.com/search?q={}',
     pathDelimiter: '/',
     title: false,
+    suggestions: true,
+    suggestionsLimit: 4,
   },
 
   categories: [],
 };
 
 export const createConfigState = (initState: ConfigState = defaultInitState) => {
-  return createStore<ConfigStore>()(
+  const store = createStore<ConfigStore>()(
     persist(
       (set) => ({
         ...initState,
@@ -61,13 +65,7 @@ export const createConfigState = (initState: ConfigState = defaultInitState) => 
         },
 
         loadDefaultSettings: () => {
-          set(() => ({
-            settings: {
-              searchEngine: 'https://encrypted.google.com/search?q={}',
-              pathDelimiter: '/',
-              title: false,
-            },
-          }));
+          set(() => ({ settings: defaultInitState.settings }));
         },
 
         resetCategories: () => {
@@ -75,7 +73,7 @@ export const createConfigState = (initState: ConfigState = defaultInitState) => 
         },
 
         updateSettings: (settings) => {
-          set((state) => ({ settings, categories: state.categories }));
+          set(() => ({ settings }));
         },
 
         createCategory: (title) => {
@@ -207,4 +205,25 @@ export const createConfigState = (initState: ConfigState = defaultInitState) => 
       },
     ),
   );
+
+  const missingKeys: (keyof Settings)[] = [];
+
+  const { settings: settingsState } = store.getState();
+  const { settings: defaultSettings } = defaultInitState;
+
+  for (const key in defaultSettings) {
+    if (key in settingsState) {
+      continue;
+    }
+
+    missingKeys.push(key as keyof Settings);
+  }
+
+  if (missingKeys.length) {
+    store.setState((state) => ({
+      settings: { ...state.settings, ...pick(defaultSettings, missingKeys) },
+    }));
+  }
+
+  return store;
 };

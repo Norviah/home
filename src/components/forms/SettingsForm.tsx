@@ -77,6 +77,57 @@ export function SettingsForm() {
 
           <FormField
             control={form.control}
+            name='suggestions'
+            render={({ field }) => (
+              <FormItem className='flex flex-row items-center justify-between'>
+                <div className='space-y-0.5'>
+                  <FormLabel>Suggestions</FormLabel>
+
+                  <FormDescription>
+                    Whether to show suggestions when searching, fetched from DuckDuckGo.
+                  </FormDescription>
+                </div>
+
+                <FormControl>
+                  <Switch checked={field.value} onCheckedChange={field.onChange} />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+
+          {settings.suggestions && (
+            <FormField
+              control={form.control}
+              name='suggestionsLimit'
+              render={({ field }) => (
+                <FormItem className='flex flex-row items-start justify-between'>
+                  <FormLabel className='flex flex-col gap-2'>
+                    <p>Suggestion Limit</p>
+
+                    <p className='text-foreground-lighter'>
+                      Determines how many suggestions to show when searching.
+                    </p>
+                  </FormLabel>
+
+                  <div className='flex flex-col items-end justify-start'>
+                    <FormControl>
+                      <Input
+                        type='number'
+                        className='w-20'
+                        placeholder={settings?.suggestionsLimit.toString()}
+                        {...field}
+                      />
+                    </FormControl>
+
+                    <FormMessage />
+                  </div>
+                </FormItem>
+              )}
+            />
+          )}
+
+          <FormField
+            control={form.control}
             name='searchEngine'
             render={({ field }) => (
               <FormItem>

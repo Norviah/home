@@ -10,7 +10,7 @@ export const Link = z.object({
   url: z.string().url(),
   query: z
     .string()
-    .refine((value) => value.includes('{}') )
+    .refine((value) => value.includes('{}'))
     .optional(),
   id: Id,
   index: z.number(),
@@ -31,6 +31,8 @@ export const Settings = z.object({
   searchEngine: z.string().refine((value) => value.includes('{}')),
   pathDelimiter: z.string(),
   title: z.boolean(),
+  suggestions: z.boolean(),
+  suggestionsLimit: z.coerce.number().min(1).max(8),
 });
 
 export type Settings = z.infer<typeof Settings>;
