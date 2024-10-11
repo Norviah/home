@@ -82,7 +82,7 @@ export function SearchInput(): JSX.Element {
 
     if (
       event.key === 'Enter' &&
-      focusedSuggestion &&
+      focusedSuggestion !== null &&
       !(document.activeElement === inputRef.current)
     ) {
       return onSubmit({ query: suggestions[focusedSuggestion] });
