@@ -43,7 +43,7 @@ export function EditLinkForm({ link, category, provided }: EditLinkFormProps) {
     <div ref={provided.innerRef} {...provided.draggableProps}>
       <Form {...form}>
         <form
-          className='flex w-full flex-row items-center justify-between gap-10'
+          className='flex w-full flex-row items-start justify-between gap-10'
           onSubmit={form.handleSubmit(onSubmit)}
         >
           <div className='flex w-full flex-row items-center justify-center gap-2'>
@@ -51,61 +51,63 @@ export function EditLinkForm({ link, category, provided }: EditLinkFormProps) {
               <GripVerticalIcon size={20} />
             </div>
 
-            <FormField
-              control={form.control}
-              name='name'
-              render={({ field }) => (
-                <FormItem className='w-full'>
-                  <FormControl>
-                    <Input placeholder={link.name} {...field} />
-                  </FormControl>
+            <div className='flex w-full flex-row items-start justify-center gap-2'>
+              <FormField
+                control={form.control}
+                name='name'
+                render={({ field }) => (
+                  <FormItem className='w-full'>
+                    <FormControl>
+                      <Input placeholder={link.name} {...field} />
+                    </FormControl>
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            <FormField
-              control={form.control}
-              name='key'
-              render={({ field }) => (
-                <FormItem className='w-20'>
-                  <FormControl>
-                    <Input className='w-20' placeholder={link.key} {...field} />
-                  </FormControl>
+              <FormField
+                control={form.control}
+                name='key'
+                render={({ field }) => (
+                  <FormItem className='w-20'>
+                    <FormControl>
+                      <Input className='w-20' placeholder={link.key} {...field} />
+                    </FormControl>
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            <FormField
-              control={form.control}
-              name='url'
-              render={({ field }) => (
-                <FormItem className='w-full'>
-                  <FormControl>
-                    <Input placeholder={link.url} {...field} />
-                  </FormControl>
+              <FormField
+                control={form.control}
+                name='url'
+                render={({ field }) => (
+                  <FormItem className='w-full'>
+                    <FormControl>
+                      <Input placeholder={link.url} {...field} />
+                    </FormControl>
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            <FormField
-              control={form.control}
-              name='query'
-              render={({ field }) => (
-                <FormItem className='w-full'>
-                  <FormControl>
-                    <Input placeholder={link.query ?? 'Search Path'} {...field} />
-                  </FormControl>
+              <FormField
+                control={form.control}
+                name='query'
+                render={({ field }) => (
+                  <FormItem className='w-full'>
+                    <FormControl>
+                      <Input placeholder={link.query ?? 'Search Path'} {...field} />
+                    </FormControl>
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
           </div>
 
           <div className='flex flex-row gap-2'>
