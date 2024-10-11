@@ -8,7 +8,10 @@ export const Link = z.object({
   name: z.string().min(1),
   key: z.string().min(1),
   url: z.string().url(),
-  query: z.string().optional(),
+  query: z
+    .string()
+    .refine((value) => value.includes('{}') )
+    .optional(),
   id: Id,
   index: z.number(),
 });
