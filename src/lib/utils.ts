@@ -47,6 +47,35 @@ export function randomNumber(min = 0, max = Number.MAX_SAFE_INTEGER): number {
 }
 
 /**
+ * Creates a copy of the object with only the specified keys.
+ *
+ * @param obj The object to copy.
+ * @param keys The keys to copy.
+ * @returns The copied object with the specified keys.
+ * @example
+ *
+ * ```ts
+ * const originalObject = {
+ *   name: 'John Doe',
+ *   age: 25,
+ *   email: 'jdoe@gmail.com',
+ * };
+ *
+ * const nameAndEmail = pick(originalObject, ['name', 'email']);
+ * // { name: 'John Doe', email: 'jdoe@gmail.com' }
+ * ```
+ */
+export function pick<T, K extends keyof T>(obj: T, keys: K[]): Pick<T, K> {
+  const copy = {} as T;
+
+  for (const key of keys) {
+    copy[key] = obj[key];
+  }
+
+  return copy as Pick<T, K>;
+}
+
+/**
  * Determines if the string is a URL.
  *
  * @param string The string to check.
