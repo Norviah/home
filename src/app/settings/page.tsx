@@ -7,6 +7,7 @@ import {
   EditLinkForm,
   SettingsForm,
 } from '@/components/forms';
+import { CategoriesContainer } from '@/components/forms/Categories';
 import { CategoryLinks } from '@/components/forms/CategoryLinks';
 import { Card } from '@/components/ui/Card';
 import { Header } from '@/components/ui/Header';
@@ -33,15 +34,7 @@ export default function ProfilePage() {
         <CreateCategoryForm />
 
         {categories.length > 0 ? (
-          categories.map((category) => (
-            <Card className='space-y-8 p-5' key={category.id}>
-              <CategoryTitleForm category={category} />
-
-              <CreateLinkForm category={category} />
-
-              {category.links.length > 0 ? <CategoryLinks category={category} /> : <p>No links.</p>}
-            </Card>
-          ))
+          <CategoriesContainer categories={categories} />
         ) : (
           <p>No categories.</p>
         )}

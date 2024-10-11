@@ -23,6 +23,7 @@ export type ConfigActions = {
   deleteLink: (category: number, link: number) => void;
   loadDummyConfig: () => void;
   moveLink: (category: number, source: number, destination: number) => void;
+  moveCategory: (source: number, destination: number) => void;
 };
 
 export type ConfigStore = ConfigState & ConfigActions;
@@ -187,6 +188,17 @@ export const createConfigState = (initState: ConfigState = defaultInitState) => 
                 return c;
               }),
             };
+          });
+        },
+
+        moveCategory: (sourceIndex: number, destinationIndex: number) => {
+          set((state) => {
+            const copy = [...state.categories];
+
+            const [element] = copy.splice(sourceIndex, 1);
+            copy.splice(destinationIndex, 0, element);
+
+            return { categories: copy };
           });
         },
       }),

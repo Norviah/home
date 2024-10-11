@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/Button';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/Form';
 import { Header } from '@/components/ui/Header';
 import { Input } from '@/components/ui/Input';
-import { CheckIcon, EditIcon, TrashIcon, XIcon } from 'lucide-react';
+import { CheckIcon, EditIcon, GripVerticalIcon, TrashIcon, XIcon } from 'lucide-react';
 
 import { useForm } from '@/hooks/useForm';
 import { TitleSchema } from '@/lib/schemas';
@@ -12,12 +12,14 @@ import { useState } from 'react';
 import { useConfigStore } from '@/lib/store/counter-store-provider';
 
 import type { Category } from '@/lib/schemas';
+import type { DraggableProvided } from '@hello-pangea/dnd';
 
 export type CategoryTitleFormProps = {
   category: Category;
+  provided: DraggableProvided;
 };
 
-export function CategoryTitleForm({ category }: CategoryTitleFormProps) {
+export function CategoryTitleForm({ category, provided }: CategoryTitleFormProps) {
   const { editCategoryTitle, deleteCategory } = useConfigStore((state) => state);
   const [state, setState] = useState<'VIEW' | 'EDIT'>('VIEW');
 
@@ -45,30 +47,36 @@ export function CategoryTitleForm({ category }: CategoryTitleFormProps) {
         className='flex w-full flex-row items-center justify-between gap-10'
         onSubmit={form.handleSubmit(onSubmit)}
       >
-        {state === 'VIEW' ? (
-          <Header
-            onClick={() => {
-              setState('EDIT');
-            }}
-            type='h4'
-          >
-            {category.title}
-          </Header>
-        ) : (
-          <FormField
-            control={form.control}
-            name='title'
-            render={({ field }) => (
-              <FormItem className='w-1/2'>
-                <FormControl>
-                  <Input {...field} />
-                </FormControl>
+        <div className='flex flex-row items-center gap-2'>
+          <div {...provided.dragHandleProps} className='cursor-grab'>
+            <GripVerticalIcon size={20} />
+          </div>
 
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        )}
+          {state === 'VIEW' ? (
+            <Header
+              onClick={() => {
+                setState('EDIT');
+              }}
+              type='h4'
+            >
+              {category.title}
+            </Header>
+          ) : (
+            <FormField
+              control={form.control}
+              name='title'
+              render={({ field }) => (
+                <FormItem className='w-1/2'>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          )}
+        </div>
 
         <div className='flex flex-row gap-2'>
           {state === 'EDIT' && (
