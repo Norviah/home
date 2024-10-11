@@ -27,7 +27,7 @@ export function CategoriesContainer({ categories }: CategoriesProps): JSX.Elemen
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId='categories'>
         {(provided) => (
-          <div ref={provided.innerRef} {...provided.droppableProps} className='space-y-8'>
+          <div ref={provided.innerRef} {...provided.droppableProps} className='space-y-3'>
             {categories.map((category, index) => (
               <Draggable key={category.id} draggableId={category.id.toString()} index={index}>
                 {(provided) => (
