@@ -1,3 +1,9 @@
+## [v1.2.0](https://github.com/Norviah/home/compare/v1.1.0...v1.2.0) (2024-11-04)
+
+### Features
+
+- **config**: show category titles by default <code>[fe16b24](https://github.com/Norviah/home/commit/fe16b24de5e8919fc300c82e78844f2c2da7876a)</code>
+
 ## [v1.1.0](https://github.com/Norviah/home/compare/v1.0.0...v1.1.0) (2024-11-04)
 
 ### Features
