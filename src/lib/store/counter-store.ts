@@ -1,7 +1,7 @@
+// import { create } from 'zustand';
+import { createJSONStorage, persist } from 'zustand/middleware';
 // src/stores/counter-store.ts
 import { createStore } from 'zustand/vanilla';
-// import { create } from 'zustand';
-import { persist, createJSONStorage } from 'zustand/middleware';
 import { defaultConfig, pick, randomNumber } from '../utils';
 
 import type { Category, LinkFormSchema, Settings } from '../schemas';

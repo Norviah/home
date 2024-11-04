@@ -1,9 +1,9 @@
 import { TailwindIndicator } from '@/components/TailwindIndicator';
-import { ConfigStoreProvider } from '@/lib/store/counter-store-provider';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { ToastProvider } from '@/components/ToastProvider';
 import { siteConfig } from '@/lib/config';
 import { overpass } from '@/lib/font';
+import { ConfigStoreProvider } from '@/lib/store/counter-store-provider';
 import { cn } from '@/lib/utils';
 
 import type { LayoutProps } from '@/types';

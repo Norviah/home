@@ -4,9 +4,9 @@ import { CategoryLinks } from './CategoryLinks';
 import { CategoryTitleForm } from './CategoryTitleForm';
 import { CreateLinkForm } from './CreateLinkForm';
 
+import { useStore } from '@/hooks/useStore';
 import type { Category } from '@/lib/schemas';
 import type { DropResult } from '@hello-pangea/dnd';
-import { useStore } from '@/hooks/useStore';
 
 export type CategoriesProps = {
   categories: Category[];

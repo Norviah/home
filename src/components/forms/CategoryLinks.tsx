@@ -1,8 +1,8 @@
 'use client';
 
-import { EditLinkForm } from './EditLinkForm';
-import { DragDropContext, Draggable, Droppable, type DropResult } from '@hello-pangea/dnd';
+import { DragDropContext, Draggable, type DropResult, Droppable } from '@hello-pangea/dnd';
 import { GripVerticalIcon } from 'lucide-react';
+import { EditLinkForm } from './EditLinkForm';
 
 import { useStore } from '@/hooks/useStore';
 
