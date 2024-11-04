@@ -2,9 +2,6 @@ import { TailwindIndicator } from '@/components/TailwindIndicator';
 import { ConfigStoreProvider } from '@/lib/store/counter-store-provider';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { ToastProvider } from '@/components/ToastProvider';
-import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/next';
-
 import { siteConfig } from '@/lib/config';
 import { overpass } from '@/lib/font';
 import { cn } from '@/lib/utils';
@@ -44,8 +41,6 @@ export default function RootLayout(props: LayoutProps): JSX.Element {
           </ThemeProvider>
         </ConfigStoreProvider>
         <TailwindIndicator />
-        <Analytics />
-        <SpeedInsights />
         <ToastProvider className={overpass.className} />
       </body>
     </html>
