@@ -3,6 +3,7 @@ import { twMerge } from 'tailwind-merge';
 
 import type { ClassValue } from 'clsx';
 import type { Config } from './schemas';
+import type { ConfigState } from './store/counter-store';
 
 /**
  * A utility function that is a wrapper around the the `clsx` and
@@ -108,6 +109,12 @@ function hasProtocol(url: string): boolean {
   return /^[a-zA-Z]+:\/\//i.test(url);
 }
 
+export type GenerateUrlOptions = {
+  config: ConfigState;
+  raw: string;
+  forceSearch?: boolean;
+};
+
 /**
  * Constructs a URL inferred from the query and the user's configuration.
  *
@@ -142,21 +149,25 @@ function hasProtocol(url: string): boolean {
  * - `search term`: `https://encrypted.google.com/search?q=search term`
  * - `github.com`: `https://github.com`
  */
-export function generateUrl(config: Config, raw: string): string {
+export function generateUrl({ config, raw, forceSearch = false }: GenerateUrlOptions): string {
   const query: string = raw.trim();
+
+  if (forceSearch) {
+    return `${config.settings.searchEngine.replace(/{}/g, encodeURI(query))}`;
+  }
 
   if (isUrl(query)) {
     return hasProtocol(query) ? query : `https://${query}`;
   }
 
   const [searchKeyRaw, rawSearch] = query.split(/ (.*)/);
-  const [searchKey, paths] = searchKeyRaw.split(new RegExp(`${config.pathDelimiter}(.*)`));
+  const [searchKey, paths] = searchKeyRaw.split(new RegExp(`${config.settings.pathDelimiter}(.*)`));
 
   const allLinks = config.categories.flatMap((category) => category.links);
   const link = allLinks.find((link) => link.key.toLowerCase() === searchKey.toLowerCase());
 
   if (!link) {
-    return `${config.searchEngine.replace(/{}/g, encodeURI(query))}`;
+    return `${config.settings.searchEngine.replace(/{}/g, encodeURI(query))}`;
   }
 
   const url = new URL(link.url);

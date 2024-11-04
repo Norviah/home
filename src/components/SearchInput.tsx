@@ -14,10 +14,11 @@ export function SearchInput(): JSX.Element {
   const [query, setQuery] = useState('');
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [focusedSuggestion, setFocusedSuggestion] = useState<number | null>(null);
+  const [forceSearch, setForceSearch] = useState<boolean>(false);
 
   const debouncedQuery = useDebounce(query, 150);
   const inputRef = useRef<HTMLInputElement>(null);
-  const { categories, settings } = useStore();
+  const config = useStore();
 
   const form = useForm<SearchSchema>({
     resolver: zodResolver(SearchSchema),
@@ -33,8 +34,8 @@ export function SearchInput(): JSX.Element {
     setSuggestions([]);
   }
 
-  function onSubmit({ query }: SearchSchema) {
-    window.location.href = generateUrl({ categories, ...settings }, query);
+  function onSubmit({ query: raw }: SearchSchema) {
+    window.location.href = generateUrl({ config, raw, forceSearch });
   }
 
   function onChange({ query }: SearchSchema) {
@@ -80,6 +81,10 @@ export function SearchInput(): JSX.Element {
       return focusSuggestion(event.key);
     }
 
+    if (!(event.key === 'Enter')) {
+      setForceSearch(event.key === 'Shift' || event.key === 'Control');
+    }
+
     if (
       event.key === 'Enter' &&
       focusedSuggestion !== null &&
@@ -119,7 +124,7 @@ export function SearchInput(): JSX.Element {
 
     const phrases = ((await res.json()) as { phrase: string }[])
       .filter(({ phrase }) => phrase.trim() !== query.trim())
-      .slice(0, settings.suggestionsLimit)
+      .slice(0, config.settings.suggestionsLimit)
       .map(({ phrase }) => phrase);
 
     if (query === '') {
@@ -130,7 +135,7 @@ export function SearchInput(): JSX.Element {
   }
 
   useEffect(() => {
-    if (debouncedQuery.trim().length === 0 || !settings.suggestions) {
+    if (debouncedQuery.trim().length === 0 || !config.settings.suggestions) {
       return;
     }
 
@@ -165,7 +170,7 @@ export function SearchInput(): JSX.Element {
 
                 return (
                   <a
-                    href={generateUrl({ categories, ...settings }, suggestion)}
+                    href={generateUrl({ config, forceSearch, raw: suggestion })}
                     key={suggestion}
                     className={cn(
                       'rounded p-2',
