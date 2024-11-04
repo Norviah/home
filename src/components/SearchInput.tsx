@@ -134,6 +134,7 @@ export function SearchInput(): JSX.Element {
     setSuggestions(phrases);
   }
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies:
   useEffect(() => {
     if (debouncedQuery.trim().length === 0 || !config.settings.suggestions) {
       return;
