@@ -186,7 +186,7 @@ export function generateUrl({ config, raw, forceSearch = false }: GenerateUrlOpt
 export const defaultConfig: Config = {
   searchEngine: 'https://encrypted.google.com/search?q={}',
   pathDelimiter: '/',
-  title: false,
+  title: true,
   suggestions: true,
   suggestionsLimit: 5,
   categories: [

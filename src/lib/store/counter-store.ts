@@ -33,7 +33,7 @@ export const initConfigState = (): ConfigState => {
     settings: {
       searchEngine: 'https://encrypted.google.com/search?q={}',
       pathDelimiter: '/',
-      title: false,
+      title: true,
       suggestions: true,
       suggestionsLimit: 4,
     },
@@ -46,7 +46,7 @@ export const defaultInitState: ConfigState = {
   settings: {
     searchEngine: 'https://encrypted.google.com/search?q={}',
     pathDelimiter: '/',
-    title: false,
+    title: true,
     suggestions: true,
     suggestionsLimit: 4,
   },
