@@ -19,11 +19,21 @@ import type { ButtonProps } from '@/components/ui/Button';
 export type PromptProps = Omit<ButtonProps, 'onClick'> & {
   title: React.ReactNode;
   text: React.ReactNode;
+  deleteText: React.ReactNode;
   onClick: () => void;
   icon: React.ReactNode;
 };
 
-export function Prompt({ className, children, onClick, title, text, icon, ...props }: PromptProps) {
+export function Prompt({
+  className,
+  children,
+  onClick,
+  title,
+  text,
+  icon,
+  deleteText,
+  ...props
+}: PromptProps) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -53,7 +63,7 @@ export function Prompt({ className, children, onClick, title, text, icon, ...pro
               setOpen(false);
             }}
           >
-            Delete
+            {deleteText}
           </Button>
         </DialogFooter>
       </DialogContent>

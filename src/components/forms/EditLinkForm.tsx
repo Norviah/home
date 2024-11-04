@@ -138,6 +138,7 @@ export function EditLinkForm({ link, category, provided }: EditLinkFormProps) {
                   <span className='text-foreground'>{link.name}</span>?
                 </>
               }
+              deleteText='Delete'
               onClick={onDelete}
               icon={<TrashIcon className='size-4' />}
             />

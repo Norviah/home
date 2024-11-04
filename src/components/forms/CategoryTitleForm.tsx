@@ -109,6 +109,7 @@ export function CategoryTitleForm({ category, provided }: CategoryTitleFormProps
           <Prompt
             title='Delete category'
             text='Are you sure you want to delete this category?'
+            deleteText='Delete'
             onClick={onDelete}
             icon={<TrashIcon className='size-4' />}
           />

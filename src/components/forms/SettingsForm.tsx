@@ -182,6 +182,7 @@ export function SettingsForm() {
         <Prompt
           title='Reset Settings'
           text='Are you sure you want to reset settings?'
+          deleteText='Reset'
           type='reset'
           icon='Reset'
           onClick={onReset}
