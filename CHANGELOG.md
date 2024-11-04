@@ -1,6 +1,18 @@
-## Unreleased
+## [v1.1.0](https://github.com/Norviah/home/compare/v1.0.0...v1.1.0) (2024-11-04)
 
 ### Features
+
+- add a method to force search a query using the search engine <code>[2ac8013](https://github.com/Norviah/home/commit/2ac80132178a04a8cd4bbde982c69f2f779f4f46)</code>
+
+- **settings**: add settings for enabling and limiting suggestions <code>[9dc0177](https://github.com/Norviah/home/commit/9dc01779e39de8e85ea7dfb9c0d1faec0c235b1f)</code>
+
+- **utils**: add a function to pick specific keys from an object <code>[857c1f3](https://github.com/Norviah/home/commit/857c1f316569373382c452f052cc4044bf1d33d8)</code>
+
+- **search**: render suggestions as links <code>[40b7f78](https://github.com/Norviah/home/commit/40b7f786ccace71fdb258ef854f20b7d46b7cf43)</code>
+
+- **search**: add suggestions using duckduckgo's api <code>[56a5248](https://github.com/Norviah/home/commit/56a5248665c1ef72dfa6a0b1fb99118f2a8a5f50)</code>
+
+- **hooks**: add a hook to debounce values <code>[e3169c2](https://github.com/Norviah/home/commit/e3169c2209b88f8af72c89a9b81e2aa3605b6fbc)</code>
 
 - **schema**: ensure that `Link.query` has `{}` <code>[437ebd5](https://github.com/Norviah/home/commit/437ebd5782a5f8499907b7ce4c9739879f37d369)</code>
 
@@ -33,6 +45,12 @@
 - **routes**: add `/settings` <code>[6bd9edc](https://github.com/Norviah/home/commit/6bd9edc62e598fd937db1d705b72c052bb30abfb)</code>
 
 - **components**: add a component to render an icon link in top-right corner <code>[60d7caa](https://github.com/Norviah/home/commit/60d7caa66ea01107521a86ec89bb0ce985c2209d)</code>
+
+### Bug Fixes
+
+- **utils**: encode query parameter when generating a url for the search engine <code>[3f2a4c2](https://github.com/Norviah/home/commit/3f2a4c20a343b78d1ac759718ef5a4eefd796193)</code>
+
+- **search**: fix logic of picking a suggestion by instead ensuring the state isn't null <code>[b8994d7](https://github.com/Norviah/home/commit/b8994d7f6491a5d39ad3894b52729c60eec2e47a)</code>
 
 ### UI
 
