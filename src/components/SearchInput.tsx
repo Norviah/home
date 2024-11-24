@@ -12,6 +12,8 @@ import { useForm } from 'react-hook-form';
 
 export function SearchInput(): JSX.Element {
   const [query, setQuery] = useState('');
+  const [queryReference, setQueryReference] = useState('');
+
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [focusedSuggestion, setFocusedSuggestion] = useState<number | null>(null);
   const [forceSearch, setForceSearch] = useState<boolean>(false);
@@ -69,8 +71,11 @@ export function SearchInput(): JSX.Element {
     setFocusedSuggestion(nextIndex);
 
     if (nextIndex === null) {
+      form.setValue('query', queryReference);
       inputRef.current?.focus();
     } else {
+      setQueryReference(query);
+      form.setValue('query', `${suggestions[nextIndex]} `);
       inputRef.current?.blur();
     }
   }
